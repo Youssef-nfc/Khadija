@@ -98,10 +98,9 @@
             background: radial-gradient(circle at top, var(--rose-glow) 0%, transparent 70%);
         }
 
-        /* Logo Frame Styling */
         .logo-box {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 2px solid var(--gold-primary);
             margin: 0 auto 15px;
@@ -150,7 +149,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Back to Home Button */
         .back-home-btn {
             background: transparent;
             color: var(--gold-primary);
@@ -165,7 +163,7 @@
             gap: 5px;
         }
 
-        /* Main Dashboard Menu Grid */
+        /* Dashboard Grid */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -200,7 +198,7 @@
             color: var(--white-warm);
         }
 
-        /* Services & Pricing Table */
+        /* Pricing Table */
         .pricing-table {
             width: 100%;
             border-collapse: collapse;
@@ -229,7 +227,7 @@
             font-weight: 700;
         }
 
-        /* Photo Gallery Grid & Lightbox */
+        /* Photo Gallery Grid */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -241,7 +239,7 @@
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--border-gold);
-            height: 130px;
+            height: 140px;
             position: relative;
             cursor: pointer;
         }
@@ -256,41 +254,95 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             color: var(--rose-soft);
             font-size: 11px;
             text-align: center;
-            padding: 4px 0;
+            padding: 5px 0;
         }
 
+        /* Interactive Fullscreen Lightbox with Navigation */
         .lightbox {
             display: none;
             position: fixed;
             z-index: 1000;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
             justify-content: center;
             align-items: center;
             flex-direction: column;
         }
 
+        .lightbox-img-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .lightbox img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 10px;
+            max-width: 95%;
+            max-height: 80vh;
+            border-radius: 8px;
             border: 2px solid var(--gold-primary);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: var(--rose-soft);
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.25);
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            user-select: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+            z-index: 1002;
+        }
+
+        .lightbox-btn:active {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        .lightbox-prev {
+            right: 15px;
+        }
+
+        .lightbox-next {
+            left: 15px;
         }
 
         .lightbox-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 25px;
             color: #fff;
-            font-size: 30px;
+            font-size: 35px;
             cursor: pointer;
+            z-index: 1002;
+            line-height: 1;
         }
 
         /* Booking Form */
@@ -339,7 +391,7 @@
             gap: 8px;
         }
 
-        /* Contact Section Cards */
+        /* Contact Section */
         .contact-card {
             background: var(--bg-card);
             border-radius: 12px;
@@ -414,7 +466,7 @@
     <!-- Header Section -->
     <header class="hero">
         <div class="logo-box">
-            <img src="Khadija.jpg" alt="Toujours Belle Logo" onerror="this.src='https://via.placeholder.com/120/000/d4af37?text=Kadija+Logo'">
+            <img src="Khadija.jpg" alt="Toujours Belle Logo" onerror="this.src='https://via.placeholder.com/130/000/d4af37?text=Logo'">
         </div>
         <h1>Toujours Belle</h1>
         <h2>Dija Centre - Coiffure & Esthétique</h2>
@@ -520,21 +572,37 @@
         <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
         <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-images"></i> معرض الصور (اضغطي للتكبير)</h3>
         <div class="gallery-grid">
-            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/f8c8dc?text=Make+Up')">
-                <img src="https://via.placeholder.com/300x300/222/f8c8dc?text=Make+Up" alt="Makeup">
-                <div class="gallery-overlay">Makeup المكياج</div>
+            <div class="gallery-item" onclick="openLightbox(0)">
+                <img src="Khadija1.jpg" alt="صورة 1">
+                <div class="gallery-overlay">صورة 1</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/d4af37?text=Tangafte')">
-                <img src="https://via.placeholder.com/300x300/222/d4af37?text=Tangafte" alt="Tangafte">
-                <div class="gallery-overlay">Tngaaf النكافة</div>
+            <div class="gallery-item" onclick="openLightbox(1)">
+                <img src="Khadija2.jpg" alt="صورة 2">
+                <div class="gallery-overlay">صورة 2</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/f8c8dc?text=Soin+de+visage')">
-                <img src="https://via.placeholder.com/300x300/222/f8c8dc?text=Soin+Visage" alt="Soin de visage">
-                <div class="gallery-overlay">Soin de visage البشرة</div>
+            <div class="gallery-item" onclick="openLightbox(2)">
+                <img src="Khadija3.jpg" alt="صورة 3">
+                <div class="gallery-overlay">صورة 3</div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/d4af37?text=Coiffure')">
-                <img src="https://via.placeholder.com/300x300/222/d4af37?text=Coiffure" alt="Coiffure">
-                <div class="gallery-overlay">Coiffure الشعر</div>
+            <div class="gallery-item" onclick="openLightbox(3)">
+                <img src="Khadija4.jpg" alt="صورة 4">
+                <div class="gallery-overlay">صورة 4</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(4)">
+                <img src="Khadija5.jpg" alt="صورة 5">
+                <div class="gallery-overlay">صورة 5</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(5)">
+                <img src="Khadija6.jpg" alt="صورة 6">
+                <div class="gallery-overlay">صورة 6</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(6)">
+                <img src="Khadija7.jpg" alt="صورة 7">
+                <div class="gallery-overlay">صورة 7</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(7)">
+                <img src="Khadija8.jpg" alt="صورة 8">
+                <div class="gallery-overlay">صورة 8</div>
             </div>
         </div>
     </div>
@@ -589,10 +657,17 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal -->
+    <!-- Fullscreen Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="" alt="Full Screen Image">
+        
+        <div class="lightbox-img-container">
+            <button class="lightbox-btn lightbox-prev" onclick="changeImage(-1)"><i class="fa-solid fa-chevron-right"></i></button>
+            <img id="lightbox-img" src="" alt="Full Screen Image">
+            <button class="lightbox-btn lightbox-next" onclick="changeImage(1)"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>
+        
+        <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
 
     <!-- Footer & Terms -->
@@ -622,14 +697,67 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Fullscreen Lightbox */
-    function openLightbox(imgSrc) {
-        document.getElementById('lightbox-img').src = imgSrc;
+    /* Gallery Data List */
+    const galleryItems = [
+        { src: 'Khadija1.jpg', title: 'صورة 1' },
+        { src: 'Khadija2.jpg', title: 'صورة 2' },
+        { src: 'Khadija3.jpg', title: 'صورة 3' },
+        { src: 'Khadija4.jpg', title: 'صورة 4' },
+        { src: 'Khadija5.jpg', title: 'صورة 5' },
+        { src: 'Khadija6.jpg', title: 'صورة 6' },
+        { src: 'Khadija7.jpg', title: 'صورة 7' },
+        { src: 'Khadija8.jpg', title: 'صورة 8' }
+    ];
+
+    let currentImgIndex = 0;
+
+    function openLightbox(index) {
+        currentImgIndex = index;
+        updateLightboxContent();
         document.getElementById('lightbox').style.display = 'flex';
     }
 
     function closeLightbox() {
         document.getElementById('lightbox').style.display = 'none';
+    }
+
+    function changeImage(direction) {
+        currentImgIndex += direction;
+        if (currentImgIndex < 0) {
+            currentImgIndex = galleryItems.length - 1;
+        } else if (currentImgIndex >= galleryItems.length) {
+            currentImgIndex = 0;
+        }
+        updateLightboxContent();
+    }
+
+    function updateLightboxContent() {
+        const imgObj = galleryItems[currentImgIndex];
+        document.getElementById('lightbox-img').src = imgObj.src;
+        document.getElementById('lightbox-caption').innerText = imgObj.title;
+    }
+
+    /* Mobile Swipe Gestures Support */
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const lightboxElem = document.getElementById('lightbox');
+    lightboxElem.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    lightboxElem.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 40) {
+            changeImage(1); // Swipe Left
+        }
+        if (touchEndX > touchStartX + 40) {
+            changeImage(-1); // Swipe Right
+        }
     }
 
     /* WhatsApp Direct Booking Script */
