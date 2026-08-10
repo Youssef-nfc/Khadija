@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toujours Belle | Dija Centre</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-black: #0a0a0a;
+            --bg-card: #141414;
+            --gold-primary: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --rose-soft: #f8c8dc;
+            --rose-glow: rgba(248, 200, 220, 0.25);
+            --white-warm: #fbf9f6;
+            --text-muted: #a5a5a5;
+            --border-gold: rgba(212, 175, 55, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--white-warm);
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 500px;
+            background: #111111;
+            min-height: 100vh;
+            box-shadow: 0 0 35px var(--rose-glow);
+            position: relative;
+            padding-bottom: 30px;
+            border-left: 1px solid var(--border-gold);
+            border-right: 1px solid var(--border-gold);
+        }
+
+        /* Top Horizontal Menu Bar */
+        .top-nav-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border-gold);
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            gap: 8px;
+            scrollbar-width: none;
+        }
+
+        .top-nav-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tab-btn {
+            background: var(--bg-card);
+            color: var(--rose-soft);
+            border: 1px solid var(--border-gold);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .nav-tab-btn.active {
+            background: linear-gradient(135deg, var(--gold-primary), #f3e5ab);
+            color: #000;
+            font-weight: 800;
+        }
+
+        /* Hero Header Section */
+        .hero {
+            text-align: center;
+            padding: 30px 20px 15px;
+            background: radial-gradient(circle at top, var(--rose-glow) 0%, transparent 70%);
+        }
+
+        .logo-box {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-primary);
+            margin: 0 auto 12px;
+            padding: 4px;
+            background: #000;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--white-warm);
+        }
+
+        .hero h2 {
+            font-size: 13px;
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+        }
+
+        /* Tab Content Pages */
+        .tab-page {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Back to Home Button */
+        .back-home-btn {
+            background: transparent;
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Main Dashboard Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .menu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .menu-card:active {
+            transform: scale(0.96);
+        }
+
+        .menu-card i {
+            font-size: 24px;
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .menu-card span {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white-warm);
+        }
+
+        /* Services & Pricing Table */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-gold);
+        }
+
+        .pricing-table th {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-primary);
+            text-align: right;
+            padding: 12px 15px;
+            font-size: 13px;
+        }
+
+        .pricing-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+        }
+
+        .price-tag {
+            color: var(--rose-soft);
+            font-weight: 700;
+        }
+
+        /* Photo Gallery Grid & Lightbox */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .gallery-item {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-gold);
+            height: 130px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            color: var(--rose-soft);
+            font-size: 11px;
+            text-align: center;
+            padding: 4px 0;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            border: 2px solid var(--gold-primary);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--rose-soft);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: #0d0d0d;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Contact Section Cards */
+        .contact-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white-warm);
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .contact-row i {
+            width: 32px;
+            height: 32px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+        }
+
+        /* Footer & Terms */
+        .footer {
+            background: #050505;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-gold);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        .terms-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .terms-box h4 {
+            color: var(--rose-soft);
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    
+    <!-- Top Horizontal Navigation Tabs -->
+    <nav class="top-nav-bar">
+        <button class="nav-tab-btn active" onclick="switchTab('home-tab', this)"><i class="fa-solid fa-house"></i> الرئيسية</button>
+        <button class="nav-tab-btn" onclick="switchTab('booking-tab', this)"><i class="fa-solid fa-calendar-check"></i> إحجز الآن</button>
+        <button class="nav-tab-btn" onclick="switchTab('pricing-tab', this)"><i class="fa-solid fa-tag"></i> الأسعار والخدمات</button>
+        <button class="nav-tab-btn" onclick="switchTab('gallery-tab', this)"><i class="fa-solid fa-images"></i> معرض الصور</button>
+        <button class="nav-tab-btn" onclick="switchTab('location-tab', this)"><i class="fa-solid fa-location-dot"></i> الموقع والتواصل</button>
+        <button class="nav-tab-btn" onclick="switchTab('offers-tab', this)"><i class="fa-solid fa-gift"></i> متابعة العروض</button>
+        <button class="nav-tab-btn" onclick="switchTab('faq-tab', this)"><i class="fa-solid fa-circle-question"></i> إستفسارات</button>
+    </nav>
+
+    <!-- Header Section (Always Visible) -->
+    <header class="hero">
+        <div class="logo-box">
+            <img src="logo.jpg" alt="Toujours Belle Logo" onerror="this.src='https://via.placeholder.com/110/000/d4af37?text=TB+Dija'">
+        </div>
+        <h1>Toujours Belle</h1>
+        <h2>Dija Centre - Coiffure & Esthétique</h2>
+    </header>
+
+    <!-- TAB 1: HOME PAGE DASHBOARD -->
+    <div id="home-tab" class="tab-page active-page">
+        <div class="menu-grid">
+            <div class="menu-card" onclick="switchTab('booking-tab', document.querySelectorAll('.nav-tab-btn')[1])">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>إحجز الآن</span>
+            </div>
+            <div class="menu-card" onclick="switchTab('pricing-tab', document.querySelectorAll('.nav-tab-btn')[2])">
+                <i class="fa-solid fa-list-check"></i>
+                <span>الأسعار والخدمات</span>
+            </div>
+            <div class="menu-card" onclick="switchTab('gallery-tab', document.querySelectorAll('.nav-tab-btn')[3])">
+                <i class="fa-solid fa-images"></i>
+                <span>معرض الصور</span>
+            </div>
+            <div class="menu-card" onclick="switchTab('location-tab', document.querySelectorAll('.nav-tab-btn')[4])">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>الموقع والتواصل</span>
+            </div>
+            <div class="menu-card" onclick="switchTab('offers-tab', document.querySelectorAll('.nav-tab-btn')[5])">
+                <i class="fa-solid fa-gift"></i>
+                <span>العروض الحصرية</span>
+            </div>
+            <div class="menu-card" onclick="switchTab('faq-tab', document.querySelectorAll('.nav-tab-btn')[6])">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>إستفسارات عن خدماتنا</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: BOOKING -->
+    <div id="booking-tab" class="tab-page">
+        <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-calendar-plus"></i> إحجز موعدك الآن</h3>
+        <div class="booking-form">
+            <div class="form-group">
+                <label>الاسم الكامل</label>
+                <input type="text" id="clientName" class="form-control" placeholder="أدخلي اسمكِ الكريم">
+            </div>
+            <div class="form-group">
+                <label>الخدمة المطلوبة</label>
+                <select id="serviceSelect" class="form-control">
+                    <option value="Coiffure">قص وتصفيف الشعر</option>
+                    <option value="Soin de visage">العناية بالبشرة</option>
+                    <option value="Makeup">المكياج</option>
+                    <option value="Tangafte">تجهيز العرائس (النكافة)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>التاريخ والوقت المفضل</label>
+                <input type="datetime-local" id="bookingTime" class="form-control">
+            </div>
+            <button onclick="sendWhatsAppBooking()" class="submit-btn">
+                <i class="fa-brands fa-whatsapp"></i> تأكيد الحجز عبر الواتساب
+            </button>
+        </div>
+    </div>
+
+    <!-- TAB 3: PRICING & SERVICES -->
+    <div id="pricing-tab" class="tab-page">
+        <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-tag"></i> قائمة الأسعار والخدمات</h3>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>الخدمة</th>
+                    <th>التفاصيل</th>
+                    <th>الثمن</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>تصفيف الشعر</td>
+                    <td>سشوار، بروتين، بوتوكس</td>
+                    <td class="price-tag">من 100 د.م</td>
+                </tr>
+                <tr>
+                    <td>العناية بالبشرة</td>
+                    <td>Soin de visage هيدرافايشل</td>
+                    <td class="price-tag">من 200 د.م</td>
+                </tr>
+                <tr>
+                    <td>المكياج الاحترافي</td>
+                    <td>Makeup مناسبات وعرائس</td>
+                    <td class="price-tag">من 250 د.م</td>
+                </tr>
+                <tr>
+                    <td>تجهيز العرائس (النكافة)</td>
+                    <td>Tangafte كاملة للمناسبات</td>
+                    <td class="price-tag">حسب الطلب</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 4: GALLERY -->
+    <div id="gallery-tab" class="tab-page">
+        <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-images"></i> معرض الصور (اضغطي للتكبير)</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/f8c8dc?text=Make+Up')">
+                <img src="https://via.placeholder.com/300x300/222/f8c8dc?text=Make+Up" alt="Makeup">
+                <div class="gallery-overlay">Makeup المكياج</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/d4af37?text=Tangafte')">
+                <img src="https://via.placeholder.com/300x300/222/d4af37?text=Tangafte" alt="Tangafte">
+                <div class="gallery-overlay">Tngaaf النكافة</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/f8c8dc?text=Soin+de+visage')">
+                <img src="https://via.placeholder.com/300x300/222/f8c8dc?text=Soin+Visage" alt="Soin de visage">
+                <div class="gallery-overlay">Soin de visage البشرة</div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox('https://via.placeholder.com/600x800/222/d4af37?text=Coiffure')">
+                <img src="https://via.placeholder.com/300x300/222/d4af37?text=Coiffure" alt="Coiffure">
+                <div class="gallery-overlay">Coiffure الشعر</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: LOCATION & CONTACT -->
+    <div id="location-tab" class="tab-page">
+        <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-location-dot"></i> الموقع والتواصل</h3>
+        <div class="contact-card">
+            <a href="tel:0666585727" class="contact-row">
+                <i class="fa-solid fa-phone"></i>
+                <span>0666585727</span>
+            </a>
+            <a href="mailto:Toujoursbelle@gmail.com" class="contact-row">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Toujoursbelle@gmail.com</span>
+            </a>
+            <a href="https://maps.app.goo.gl/bPsW2zopFbpVnmEv6" target="_blank" class="contact-row">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>RUE 1076 HAY NOUR TARRAST INEZGANE AGADIR</span>
+            </a>
+            <a href="https://instagram.com/toujoursbelle_official" target="_blank" class="contact-row">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@toujoursbelle_official</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- TAB 6: OFFERS -->
+    <div id="offers-tab" class="tab-page">
+        <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-gift"></i> متابعة العروض</h3>
+        <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border-gold);">
+            <p style="margin-bottom: 15px;">تابعي صفحتنا على إنستغرام للاستفادة من التخفيضات والعروض الخاصة بالزبونات الجدد!</p>
+            <a href="https://instagram.com/toujoursbelle_official" target="_blank" class="submit-btn" style="background: linear-gradient(135deg, #e1306c, #f77737); text-decoration: none;">
+                <i class="fa-brands fa-instagram"></i> متابعة العروض على Instagram
+            </a>
+        </div>
+    </div>
+
+    <!-- TAB 7: FAQ -->
+    <div id="faq-tab" class="tab-page">
+        <button class="back-home-btn" onclick="switchTab('home-tab', document.querySelectorAll('.nav-tab-btn')[0])"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</button>
+        <h3 style="color: var(--gold-primary); margin-bottom: 15px;"><i class="fa-solid fa-circle-question"></i> إستفسارات عن خدماتنا</h3>
+        <div style="background: var(--bg-card); padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05);">
+            <h4 style="color: var(--gold-primary); font-size: 13px; margin-bottom: 5px;">هل يتطلب الحضور حجزاً مسبقاً؟</h4>
+            <p style="font-size: 12px; color: var(--text-muted);">نفضل الحجز المسبق لضمان استقبالكِ في أفضل الظروف وبدون انتظار.</p>
+        </div>
+        <div style="background: var(--bg-card); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+            <h4 style="color: var(--gold-primary); font-size: 13px; margin-bottom: 5px;">هل تتوفر خدمات النكافة خارج الصالون؟</h4>
+            <p style="font-size: 12px; color: var(--text-muted);">نعم، نقدم خدمات Tangafte الكاملة وتجهيز العرائس في المنازل والقاعات.</p>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen Image">
+    </div>
+
+    <!-- Footer & Terms -->
+    <footer class="footer">
+        <div class="terms-box">
+            <h4><i class="fa-solid fa-shield-halved"></i> شروط الاستخدام وسياسة الخصوصية</h4>
+            <p>• <strong>الحجز والإلغاء:</strong> يرجى الالتزام بالوقت المحدد للحجز، وفي حالة الإلغاء يرجى الإبلاغ قبل 24 ساعة.</p>
+            <p>• <strong>الخصوصية:</strong> بيانات الحجز تستخدم فقط للتواصل معكم ولا يتم مشاركتها إطلاقاً.</p>
+        </div>
+        <p>Toujours Belle / Dija Centre © 2026 - جميع الحقوق محفوظة</p>
+        <p style="margin-top: 5px; color: rgba(255,255,255,0.3);">تم التطوير والتجهيز لربط بطاقة NFC الذكية ⚡</p>
+    </footer>
+</div>
+
+<script>
+    /* Tab Switcher Logic */
+    function switchTab(tabId, btnElement) {
+        // Hide all tabs
+        const pages = document.querySelectorAll('.tab-page');
+        pages.forEach(page => page.classList.remove('active-page'));
+
+        // Remove active class from buttons
+        const btns = document.querySelectorAll('.nav-tab-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+
+        // Show targeted tab
+        document.getElementById(tabId).classList.add('active-page');
+        if(btnElement) btnElement.classList.add('active');
+
+        // Scroll smooth to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* Fullscreen Lightbox */
+    function openLightbox(imgSrc) {
+        document.getElementById('lightbox-img').src = imgSrc;
+        document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+
+    /* WhatsApp Direct Booking Script */
+    function sendWhatsAppBooking() {
+        const name = document.getElementById('clientName').value || 'زبونة';
+        const service = document.getElementById('serviceSelect').value;
+        const time = document.getElementById('bookingTime').value || 'غير محدد';
+        
+        const message = `السلام عليكم أختي خديجة، بغيت نحجز موعد:%0A- الاسم: ${encodeURIComponent(name)}%0A- الخدمة: ${encodeURIComponent(service)}%0A- الوقت المفضل: ${encodeURIComponent(time)}`;
+        window.open(`https://wa.me/212666585727?text=${message}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
+
