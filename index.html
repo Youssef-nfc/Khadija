@@ -98,15 +98,20 @@
             background: radial-gradient(circle at top, var(--rose-glow) 0%, transparent 70%);
         }
 
+        /* Logo Frame Styling */
         .logo-box {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 2px solid var(--gold-primary);
-            margin: 0 auto 12px;
-            padding: 4px;
-            background: #000;
-            box-shadow: 0 0 20px var(--gold-glow);
+            margin: 0 auto 15px;
+            padding: 3px;
+            background: var(--bg-black);
+            box-shadow: 0 0 25px var(--gold-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .logo-box img {
@@ -114,6 +119,7 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+            display: block;
         }
 
         .hero h1 {
@@ -405,10 +411,10 @@
         <button class="nav-tab-btn" onclick="switchTab('faq-tab', this)"><i class="fa-solid fa-circle-question"></i> إستفسارات</button>
     </nav>
 
-    <!-- Header Section (Always Visible) -->
+    <!-- Header Section -->
     <header class="hero">
         <div class="logo-box">
-            <img src="logo.jpg" alt="Toujours Belle Logo" onerror="this.src='https://via.placeholder.com/110/000/d4af37?text=TB+Dija'">
+            <img src="Khadija.jpg" alt="Toujours Belle Logo" onerror="this.src='https://via.placeholder.com/120/000/d4af37?text=Kadija+Logo'">
         </div>
         <h1>Toujours Belle</h1>
         <h2>Dija Centre - Coiffure & Esthétique</h2>
@@ -604,19 +610,15 @@
 <script>
     /* Tab Switcher Logic */
     function switchTab(tabId, btnElement) {
-        // Hide all tabs
         const pages = document.querySelectorAll('.tab-page');
         pages.forEach(page => page.classList.remove('active-page'));
 
-        // Remove active class from buttons
         const btns = document.querySelectorAll('.nav-tab-btn');
         btns.forEach(btn => btn.classList.remove('active'));
 
-        // Show targeted tab
         document.getElementById(tabId).classList.add('active-page');
         if(btnElement) btnElement.classList.add('active');
 
-        // Scroll smooth to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
